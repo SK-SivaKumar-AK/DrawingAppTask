@@ -10,7 +10,6 @@ const wss = new WebSocket.Server({ server: http });
 
 let clients = [];
 let drawingHistory = [];
-let userIDCounter = 1;
 
 
 
@@ -27,7 +26,7 @@ function broadcast(message) {
 
 wss.on('connection', (ws) => {
 
-    const userID = userIDCounter++;
+    const userID =  Math.floor(Math.random() * 9000) + 1000;
     ws.userID = userID;
 
 
