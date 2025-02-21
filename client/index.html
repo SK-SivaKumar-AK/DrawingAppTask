@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-time Drawing App</title>
+    <link rel="stylesheet" href="style.css?v=1.0">
+</head>
+<body>
+
+    <h1>Drawing App</h1>
+    <div id="clientCount"></div>
+    <div id="clientID"></div>
+    
+    <div class="container">
+        <div id="toolbar">
+            <div class="tool">
+                <label for="color-picker">Brush Color:</label>
+                <input type="color" id="color-picker" value="#000000">
+            </div>
+            <div class="tool">
+                <label for="brush-size">Brush Size:</label>
+                <input type="range" id="brush-size" min="1" max="10" value="2">
+            </div>
+            <div class="tool">
+                <button id="resetBtn">Reset Canvas</button>
+            </div>
+        </div>
+        <canvas id="canvas" width="800" height="550"></canvas>
+    </div>
+
+    <script src="script.js?v=1.0"></script>
+
+</body>
+</html>

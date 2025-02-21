@@ -1,0 +1,132 @@
+/* General Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+h1 {
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Toolbar Styling */
+#toolbar {
+    background-color: #fff;
+    padding: 20px;
+    width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    position: absolute;
+    top: 20px;
+}
+
+.tool {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tool label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.tool input[type="color"] {
+    border: none;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.tool input[type="range"] {
+    width: 80px;
+    cursor: pointer;
+}
+
+.tool button {
+    background-color: #5c6bc0;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.tool button:hover {
+    background-color: #3f4e98;
+}
+
+/* Canvas Styling */
+#canvas {
+    border: 1px solid #ddd;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Flexbox Centering for Canvas and Toolbar */
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* Aesthetic Improvements */
+.tool input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    background: #ddd;
+    border-radius: 3px;
+    outline: none;
+    transition: background 0.3s ease;
+}
+
+.tool input[type="range"]:hover {
+    background: #5c6bc0;
+}
+
+.tool input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    background: #5c6bc0;
+    cursor: pointer;
+}
+
+.tool input[type="range"]::-moz-range-thumb {
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    background: #5c6bc0;
+    cursor: pointer;
+}
+#clientCount {
+    font-size: 20px;
+    margin-top: 10px;
+}
+#clientID {
+    font-size: 20px;
+    margin-top: 10px;
+}
