@@ -1,8 +1,11 @@
+
 const socket = new WebSocket(
     (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') ? 'ws://localhost:8080' : 'wss://drawingapptaskserver.onrender.com'
 );
+
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
+
 
 
 const clientCountDiv = document.getElementById('clientCount');
@@ -24,85 +27,108 @@ socket.onopen = () => {
 
 };
 
-
 socket.onmessage = (event) => {
-
+    
     const message = JSON.parse(event.data);
 
     if (message.type === 'drawing') {
-
         drawOnCanvas(message.data);
-
     } else if (message.type === 'reset') {
-
         resetCanvas();
-
     } else if (message.type === 'user-connected') {
-
         console.log(message.message);
         clientIDDiv.textContent = message.message;
         clientCountDiv.textContent = message.clientCount;
-
     } else if (message.type === 'user-disconnected') {
-
         console.log(message.message);
         clientIDDiv.textContent = message.message;
         clientCountDiv.textContent = message.clientCount;
-
     }
 
 };
 
 
 
-canvas.addEventListener('mousedown', (e) => {
+function getPosition(e) {
 
-    drawing = true;
-    prevX = e.offsetX;
-    prevY = e.offsetY;
-
-});
-
-
-
-canvas.addEventListener('mousemove', (e) => {
-    if (drawing) {
-
-        const x = e.offsetX;
-        const y = e.offsetY;
-
-        const drawingData = {
-            startX: prevX,
-            startY: prevY,
-            endX: x,
-            endY: y,
-            brushSize: brushSize,
-            brushColor: brushColor
-        };
-
-
-        socket.send(JSON.stringify({ type: 'drawing', data: drawingData }));
-
-
-        drawOnCanvas(drawingData);
-
-        prevX = x;
-        prevY = y;
-
+    let x, y;
+    if (e.type.startsWith('touch')) {
+        const touch = e.touches[0] || e.changedTouches[0];
+        x = touch.offsetX || (touch.clientX - canvas.offsetLeft);
+        y = touch.offsetY || (touch.clientY - canvas.offsetTop);
+    } else {
+        x = e.offsetX;
+        y = e.offsetY;
     }
-});
+    return { x, y };
 
-canvas.addEventListener('mouseup', () => {
+}
+
+
+function startDrawing(e) {
+
+    const { x, y } = getPosition(e);
+    drawing = true;
+    prevX = x;
+    prevY = y;
+
+}
+
+
+
+function draw(e) {
+
+    if (!drawing) return;
+
+    const { x, y } = getPosition(e);
+    const drawingData = {
+        startX: prevX,
+        startY: prevY,
+        endX: x,
+        endY: y,
+        brushSize: brushSize,
+        brushColor: brushColor,
+    };
+
+    socket.send(JSON.stringify({ type: 'drawing', data: drawingData }));
+    drawOnCanvas(drawingData);
+
+    prevX = x;
+    prevY = y;
+
+}
+
+
+
+function stopDrawing() {
 
     drawing = false;
 
+}
+
+
+
+
+
+
+canvas.addEventListener('mousedown', startDrawing);
+canvas.addEventListener('mousemove', draw);
+canvas.addEventListener('mouseup', stopDrawing);
+canvas.addEventListener('mouseout', stopDrawing);
+
+
+
+canvas.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    startDrawing(e);
 });
-
-canvas.addEventListener('mouseout', () => {
-
-    drawing = false;
-
+canvas.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    draw(e);
 });
+canvas.addEventListener('touchend', stopDrawing);
+canvas.addEventListener('touchcancel', stopDrawing);
+
 
 
 
@@ -119,8 +145,6 @@ function drawOnCanvas(data) {
 
 }
 
-
-
 document.getElementById('resetBtn').addEventListener('click', () => {
 
     socket.send(JSON.stringify({ type: 'reset' }));
@@ -129,14 +153,11 @@ document.getElementById('resetBtn').addEventListener('click', () => {
 });
 
 
-
 function resetCanvas() {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 }
-
-
 
 document.getElementById('color-picker').addEventListener('input', (e) => {
 
@@ -144,11 +165,9 @@ document.getElementById('color-picker').addEventListener('input', (e) => {
 
 });
 
-
-
 document.getElementById('brush-size').addEventListener('input', (e) => {
 
     brushSize = e.target.value;
-
+    
 });
 

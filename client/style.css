@@ -1,4 +1,4 @@
-/* General Body Styling */
+
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f9;
@@ -11,17 +11,19 @@ body {
     flex-direction: column;
 }
 
+
 h1 {
     font-size: 32px;
     color: #333;
     margin-bottom: 20px;
 }
 
-/* Toolbar Styling */
+
 #toolbar {
     background-color: #fff;
     padding: 20px;
-    width: 400px;
+    width: 90%; 
+    max-width: 400px;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -30,6 +32,7 @@ h1 {
     position: absolute;
     top: 20px;
 }
+
 
 .tool {
     display: flex;
@@ -72,15 +75,17 @@ h1 {
     background-color: #3f4e98;
 }
 
-/* Canvas Styling */
+
 #canvas {
     border: 1px solid #ddd;
     background-color: #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    width: 100%;
+    max-width: 800px; 
 }
 
-/* Flexbox Centering for Canvas and Toolbar */
+
 .container {
     position: relative;
     display: flex;
@@ -90,7 +95,7 @@ h1 {
     width: 100%;
 }
 
-/* Aesthetic Improvements */
+
 .tool input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
@@ -122,11 +127,9 @@ h1 {
     background: #5c6bc0;
     cursor: pointer;
 }
-#clientCount {
-    font-size: 20px;
-    margin-top: 10px;
-}
-#clientID {
+
+
+#clientCount, #clientID {
     font-size: 20px;
     margin-top: 10px;
 }
