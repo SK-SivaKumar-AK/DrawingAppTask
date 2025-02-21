@@ -75,6 +75,6 @@ app.use(express.static('public'));
 
 
 http.listen(8080, () => {
-    console.log('Server is running on ws://localhost:8080');
+    console.log('Server is running');
 });
 

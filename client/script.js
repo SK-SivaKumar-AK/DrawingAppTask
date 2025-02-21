@@ -1,5 +1,5 @@
 const socket = new WebSocket(
-    (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') ? 'ws://localhost:8080' : 'ws://your-production-server.com:8080'
+    (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') ? 'ws://localhost:8080' : 'ws://drawingapptaskserver.onrender.com'
 );
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
