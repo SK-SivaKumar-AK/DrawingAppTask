@@ -18,6 +18,8 @@ let prevY = 0;
 let brushSize = 2;
 let brushColor = '#000000';
 
+canvas.width = canvas.clientWidth;
+canvas.height = canvas.clientHeight;
 
 socket.onopen = () => {
     console.log('Connected to the server');
@@ -47,17 +49,26 @@ socket.onmessage = (event) => {
 
 
 function getPosition(e) {
+
     let x, y;
+    
     if (e.type.startsWith('touch')) {
         const touch = e.touches[0] || e.changedTouches[0];
+        
         const rect = canvas.getBoundingClientRect();
-        x = touch.clientX - rect.left;
-        y = touch.clientY - rect.top;
+        
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        
+        x = (touch.clientX - rect.left) * scaleX;
+        y = (touch.clientY - rect.top) * scaleY;
     } else {
         x = e.offsetX;
         y = e.offsetY;
     }
+    
     return { x, y };
+    
 }
 
 
