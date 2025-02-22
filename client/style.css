@@ -89,6 +89,7 @@ h1 {
 @media (max-width: 768px) {
     #canvas {
         height: 70vh;
+        width: 100vw;
     }
 }
 
