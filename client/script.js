@@ -47,18 +47,17 @@ socket.onmessage = (event) => {
 
 
 function getPosition(e) {
-
     let x, y;
     if (e.type.startsWith('touch')) {
         const touch = e.touches[0] || e.changedTouches[0];
-        x = touch.offsetX || (touch.clientX - canvas.offsetLeft);
-        y = touch.offsetY || (touch.clientY - canvas.offsetTop);
+        // Get the position relative to the canvas
+        x = touch.clientX - canvas.getBoundingClientRect().left;
+        y = touch.clientY - canvas.getBoundingClientRect().top;
     } else {
         x = e.offsetX;
         y = e.offsetY;
     }
     return { x, y };
-
 }
 
 
