@@ -1,16 +1,14 @@
-
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f9;
     margin: 0;
     padding: 0;
     display: flex;
-    /* justify-content: center; */
+    justify-content: center;
     align-items: center;
     height: 100vh;
     flex-direction: column;
 }
-
 
 h1 {
     font-size: 32px;
@@ -18,11 +16,10 @@ h1 {
     margin-bottom: 20px;
 }
 
-
 #toolbar {
     background-color: #fff;
     padding: 20px;
-    width: 90%; 
+    width: 90%;
     max-width: 400px;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -32,7 +29,6 @@ h1 {
     position: absolute;
     top: 20px;
 }
-
 
 .tool {
     display: flex;
@@ -75,24 +71,31 @@ h1 {
     background-color: #3f4e98;
 }
 
-
 #canvas {
     border: 1px solid #ddd;
     background-color: #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     width: 100%;
-    max-width: 800px;
-    height: 550px;
+    height: 80vh;  /* Adjust height to 80% of the viewport height */
+    max-width: 100vw;  /* Ensures canvas doesn't stretch beyond viewport width */
 }
 
 @media (max-width: 768px) {
+    /* On mobile devices, adjust canvas size */
     #canvas {
-        height: 70vh;
-        width: 100vw;
+        width: 100vw; /* Full width of the viewport */
+        height: 70vh; /* 70% of the viewport height */
+    }
+
+    /* Ensure the toolbar takes up less space on small screens */
+    #toolbar {
+        width: 100%;
+        max-width: none; /* Let it expand fully */
+        position: static; /* Toolbar will not be fixed anymore */
+        margin-bottom: 10px; /* Adjust the spacing */
     }
 }
-
 
 .container {
     position: relative;
@@ -101,8 +104,9 @@ h1 {
     align-items: center;
     flex-direction: column;
     width: 100%;
+    height: 100vh;  /* Full viewport height */
+    padding: 0;  /* Remove any default padding */
 }
-
 
 .tool input[type="range"] {
     -webkit-appearance: none;
@@ -135,7 +139,6 @@ h1 {
     background: #5c6bc0;
     cursor: pointer;
 }
-
 
 #clientCount, #clientID {
     font-size: 20px;
